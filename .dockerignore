@@ -1,0 +1,11 @@
+modules/*
+package-lock.json
+.gitignore
+.env
+.env.example
+.env.production
+.env.development
+.env.test
+.env.staging
+.env.local
+.env.docker
