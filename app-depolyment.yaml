@@ -17,6 +17,7 @@ spec:
       containers:
         - name: url-shortener
           image: itssvinayak/url_shortner:latest
+          imagePullPolicy: Always
           resources:
             limits:
               memory: "128Mi"
