@@ -17,3 +17,7 @@ spec:
       containers:
         - name: redis
           image: redis:alpine
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

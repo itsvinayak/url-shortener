@@ -9,7 +9,7 @@ app.use(express.json());
 
 
 const client = redis.createClient({
-  url: 'redis://redis:6379'
+    url: 'redis://redis:6379'
 });
 
 client.on('connect', () => console.log('Redis client connected'));
@@ -18,7 +18,7 @@ client.connect();
 
 
 app.get('/', (req, res) => {
-  res.status(200).send(`
+    res.status(200).send(`
     <center>
       <h1>URL shortener example</h1>
       <form action="/shorten" method="POST">
@@ -29,16 +29,20 @@ app.get('/', (req, res) => {
   `);
 });
 
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+})
+
 app.post('/shorten', async (req, res) => {
-  const { url } = req.body;
-  const id = uuid.v4();
-  let redisRes = await client.set(id, url);
-  if (!VALID_URL_REGEX.test(url)) {
-    return res.status(400).send('Invalid URL');
-  } else if (redisRes !== 'OK') {
-    return res.status(500).send('<center><h1>Error saving URL</h1></center>');
-  }
-  return res.status(200).send(`
+    const { url } = req.body;
+    const id = uuid.v4();
+    let redisRes = await client.set(id, url);
+    if (!VALID_URL_REGEX.test(url)) {
+        return res.status(400).send('Invalid URL');
+    } else if (redisRes !== 'OK') {
+        return res.status(500).send('<center><h1>Error saving URL</h1></center>');
+    }
+    return res.status(200).send(`
     <center>
       <h1>URL shortener example</h1>
       <p>Your shortened URL is: <a href="/url/${id}">/${id}</a></p>
@@ -48,12 +52,12 @@ app.post('/shorten', async (req, res) => {
 });
 
 app.get('/url/:id', async (req, res) => {
-  const { id } = req.params;
-  let redisRes = await client.get(id);
-  if (!redisRes) {
-    return res.status(404).send('<center><h1>URL not found</h1></center>');
-  }
-  return res.redirect(redisRes);
+    const { id } = req.params;
+    let redisRes = await client.get(id);
+    if (!redisRes) {
+        return res.status(404).send('<center><h1>URL not found</h1></center>');
+    }
+    return res.redirect(redisRes);
 });
 
 app.listen(8080, () => console.log('Server started on port 8080'));

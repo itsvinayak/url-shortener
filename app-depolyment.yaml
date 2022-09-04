@@ -17,5 +17,15 @@ spec:
       containers:
         - name: url-shortener
           image: itssvinayak/url_shortner:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
