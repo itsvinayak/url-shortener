@@ -1,9 +1,11 @@
 kubectl apply                                    \
-    -f app-depolyment.yaml                       \
+    -f redis-hostPathPersistentVolume.yaml       \
+    -f redis-hostPathPersistentVolumeClaim.yaml  \
     -f app-service.yaml                          \
     -f redis-service.yaml                        \
-    -f redis-deployment.yaml                     \
-    -f redis-hostPathPersistentVolumeClaim.yaml  \
-    -f redis-hostPathPersistentVolume.yaml          
+    -f app-depolyment.yaml                       \
+    -f redis-deployment.yaml                     &&
+    clear                                        &&
+    echo "Done deploying"
 
 # apply the deployment and service for the app

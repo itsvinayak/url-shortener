@@ -8,6 +8,7 @@ spec:
   capacity:
     storage: 500Mi
   volumeMode: Filesystem
+  storageClassName: standard
   accessModes:
   # ReadWriteOnce - the volume can be mounted as read-write by a single node
     - ReadWriteOnce

@@ -19,11 +19,12 @@ spec:
           image: itssvinayak/url_shortner:latest
           imagePullPolicy: Always
           # setting up the environment variables for the container but we will use config maps for this as we are 10x developer
-          # env:
-          #   - name: REDIS_HOST
-          #     value: redis
-          #   - name: REDIS_PORT
-          #     value: "6379"
+          env:
+            - name: REDIS_URL
+              value: "redis://redis-service:6379"
+          # this is pod-to-pod communication
+          # for within the pod, localhost network is used
+          # for outside the pod, the service name is used
           resources:
             limits:
               memory: "128Mi"

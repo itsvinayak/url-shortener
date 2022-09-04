@@ -9,7 +9,7 @@ app.use(express.json());
 
 
 const client = redis.createClient({
-    url: 'redis://redis:6379'
+    url: process.env.REDIS_URL
 });
 
 client.on('connect', () => console.log('Redis client connected'));
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 app.get('/health', (req, res) => {
     res.status(200).send('OK');
-})
+});
 
 app.post('/shorten', async (req, res) => {
     const { url } = req.body;
