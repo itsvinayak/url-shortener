@@ -1,0 +1,32 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: url-shortener-config
+#   labels:
+#     group: url-shortener
+# data:
+#   REDIS_HOST: redis
+#   REDIS_PORT: "6379"
+#   REDIS_PASSWORD: ""
+#   REDIS_DB: "0"
+#   REDIS_URL: "redis://redis:6379"
+#   # key value pair
+
+
+# it is used in development with 
+# env:
+#   - name: REDIS_HOST
+#     valueFrom:
+#       configMapKeyRef:
+#         name: url-shortener-config
+#         key: REDIS_HOST
+#   - name: REDIS_PORT
+#     valueFrom:
+#       configMapKeyRef:
+#         name: url-shortener-config
+#         key: REDIS_PORT
+#   - name: REDIS_PASSWORD
+#     valueFrom:
+#       configMapKeyRef:
+#         name: url-shortener-config
+#         key: REDIS_PASSWORD

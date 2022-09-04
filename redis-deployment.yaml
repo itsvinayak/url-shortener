@@ -4,9 +4,11 @@ metadata:
   name: redis-deployment
   labels:
     group: url-shortener
+  # this takes a key value pair and is used to identify the deployment -l for label delete
 spec:
   replicas: 1
   selector:
+  # This is the selector for the pods that will be created by this deployment 
     matchLabels:
       app: redis
   template:
@@ -22,3 +24,20 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+          volumeMounts:
+            - mountPath: /data
+              # name: redis-data-empty-dir
+              name: redis-data-claim
+      volumes:
+        # EmptyDir is a temporary directory that shares a pod's lifetime. This will exist as long as the pod exists.
+        # - name: redis-data-empty-dir
+        #   emptyDir: {}
+        # HostPath is a directory on the host machine that is directly exposed to the container. This is not something that should be used in production. It is for development purposes only. makes data independent of the pod's lifetime.
+        # - name: redis-data-host-path
+        #   hostPath:
+        #     path: /data/redis
+        #     type: DirectoryOrCreate
+        # PersistentVolumeClaim is a request for storage by a pod. This is the way to go in production.
+        - name: redis-data-claim
+          persistentVolumeClaim:
+            claimName: redis-data-host-path-volume-claim

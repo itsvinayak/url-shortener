@@ -18,6 +18,12 @@ spec:
         - name: url-shortener
           image: itssvinayak/url_shortner:latest
           imagePullPolicy: Always
+          # setting up the environment variables for the container but we will use config maps for this as we are 10x developer
+          # env:
+          #   - name: REDIS_HOST
+          #     value: redis
+          #   - name: REDIS_PORT
+          #     value: "6379"
           resources:
             limits:
               memory: "128Mi"
