@@ -19,6 +19,7 @@ spec:
       containers:
         - name: redis
           image: redis:alpine
+          # imagePullPolicy is used to pull the image from the registry
           imagePullPolicy: Always
           resources:
             limits:

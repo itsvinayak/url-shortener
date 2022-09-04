@@ -1,2 +1,0 @@
-kubectl delete all -l 'group=url-shortener'
-# it will delete all the pods, services, deployments, etc. that have the label group=url-shortener, label is defined in the deployment.yaml and service.yaml files

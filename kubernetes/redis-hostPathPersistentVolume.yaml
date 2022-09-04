@@ -8,6 +8,7 @@ spec:
   capacity:
     storage: 500Mi
   volumeMode: Filesystem
+  # can see the storage class with kubectl get storageclass or kubectl get sc
   storageClassName: standard
   accessModes:
   # ReadWriteOnce - the volume can be mounted as read-write by a single node
